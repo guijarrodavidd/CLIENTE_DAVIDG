@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ex48</title>
+  </head>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Botones 1, 2, 3: van a sus imágenes
+      const boton1 = document.getElementById("btn1");
+      const boton2 = document.getElementById("btn2");
+      const boton3 = document.getElementById("btn3");
+      const boton4 = document.getElementById("btn4");
+
+      boton1.addEventListener("click", () => {
+        document
+          .getElementById("div1")
+          .scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+            inline: "nearest",
+          });
+      });
+
+      boton2.addEventListener("click", () => {
+        document
+          .getElementById("div2")
+          .scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+            inline: "nearest",
+          });
+      });
+
+      boton3.addEventListener("click", () => {
+        document
+          .getElementById("div3")
+          .scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+            inline: "nearest",
+          });
+      });
+
+      // Botón 4: desordenar las imágenes
+      boton4.addEventListener("click", () => {
+        const divs = document.querySelectorAll("div[id^='div']");
+
+        // Intercambiamos las fuentes de las imágenes aleatoriamente
+        const imagenes = [];
+        divs.forEach((div) => {
+          const img = div.querySelector("img");
+          imagenes.push(img.src);
+        });
+
+        // Desordenamos el array
+        for (let i = imagenes.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [imagenes[i], imagenes[j]] = [imagenes[j], imagenes[i]];
+        }
+
+        // Asignamos las imágenes desordenadas
+        let index = 0;
+        divs.forEach((div) => {
+          const img = div.querySelector("img");
+          img.src = imagenes[index];
+          index++;
+        });
+      });
+    });
+  </script>
+  <body>
+    <button id="btn1">1</button>
+    <button id="btn2">2</button>
+    <button id="btn3">3</button>
+    <button id="btn4">Desordenar</button>
+    <br /><br /><br /><br />
+
+    <div id="div1">
+      <img
+        src="../Captura desde 2025-11-04 09-39-06.png"
+        alt=""
+        width="200px"
+      />
+    </div>
+    <div id="div2">
+      <img src="../image.png" alt="" width="200px" />
+    </div>
+    <div id="div3">
+      <img src="../image0.jpeg" alt="" width="200px" />
+    </div>
+  </body>
+</html>
