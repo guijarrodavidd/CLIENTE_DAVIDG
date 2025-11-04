@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vinyl Collection</title>
+</head>
+<body>
+<script>
+// Creamos el array de objetos con los discos
+const vinylCollection = [
+  {
+    id: 1,
+    albumTitle: "José Socuéllamos",
+    artist: "Solvam",
+    tracklist: ["Inglés en 2SMR", "Javascript", "Resumen de 2º SMR en 1º DAW", "Fan de Star Wars"]
+  },
+  {
+    id: 2,
+    albumTitle: "Mariluz Ruiz",
+    artist: "Solvam",
+    tracklist: ["Redes Locales en 1ºSMR", "PHP", "Servidor", "Explica más rápido que un tren"]
+  },
+  {
+    id: 3,
+    albumTitle: "Lola Chaparro",
+    artist: "Solvam",
+    tracklist: ["Inglés en 1ºSMR", "Colorimetría", "Los Menas del Solvam", "Sostenibilidad"]
+  },
+  {
+    id: 4,
+    albumTitle: "Lorenzo",
+    artist: "Solvam",
+    tracklist: ["/bin/bash/", "Fan del Marca", "El director.", "Su coche vale más que mi casa"]
+  }
+];
+
+const inputId = parseInt(prompt("Introduce el ID del disco que quieres consultar:"));
+
+const record = vinylCollection.find(vinyl => vinyl.id === inputId);
+
+if (record) {
+  document.write(`<h2>${record.albumTitle}</h2>`);
+  document.write(`<p><strong>Artista:</strong> ${record.artist}</p>`);
+  document.write("<p><strong>Lista de canciones:</strong></p>");
+  document.write("<ul>");
+  record.tracklist.forEach(track => {
+    document.write(`<li>${track}</li>`);
+  });
+  document.write("</ul>");
+} else {
+  document.write("<p>No se encontró ningún disco con ese ID.</p>");
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+    let output = document.getElementById("output");
+
+    // Pedir ID al usuario
+    let inputId = prompt("Enter the vinyl ID to view details:");
+    let foundVinyl = vinylCollection.find(vinyl => vinyl.id === Number(inputId));
+
+    // Mostrar datos del vinilo o mensaje de error
+    if (foundVinyl) {
+      output.innerHTML = `
+        <h2>Vinyl Information:</h2>
+        <p><strong>ID:</strong> ${foundVinyl.id}</p>
+        <p><strong>Album Title:</strong> ${foundVinyl.title}</p>
+        <p><strong>Artist:</strong> ${foundVinyl.artist}</p>
+        <strong>Tracklist:</strong>
+        <ul>
+          ${foundVinyl.tracklist.map(track => `<li>${track}</li>`).join("")}
+        </ul>
+      `;
+    } else {
+      output.innerHTML = `<p>No vinyl found with ID ${inputId}.</p>`;
+    }
+
+    // EXTRA: Ordenar por criterio
+    let criterion = prompt("Sort by: id, title, or artist?").toLowerCase();
+
+    function sortByProperty(property) {
+      vinylCollection.sort((a, b) => {
+        if (a[property] < b[property]) return -1;
+        if (a[property] > b[property]) return 1;
+        return 0;
+      });
+    }
+
+    if (criterion === "id" || criterion === "title" || criterion === "artist") {
+      sortByProperty(criterion);
+
+      // Mostrar colección ordenada
+      output.innerHTML += `<h3>Vinyls sorted by ${criterion}:</h3>`;
+      vinylCollection.forEach(vinyl => {
+        output.innerHTML += `<p><strong>${vinyl.id}.</strong> ${vinyl.title} - ${vinyl.artist}</p>`;
+      });
+    } else {
+      output.innerHTML += `<p>Invalid sorting criterion.</p>`;
+    }
+  </script>
+</body>
+</html> -->
