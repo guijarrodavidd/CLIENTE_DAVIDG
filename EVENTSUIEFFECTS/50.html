@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex50 - Mouse Coordinates</title>
+    <style>
+
+        
+        #coordenadas {
+            font-size: 24px;
+            font-weight: bold;
+            color: blue;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Crear el elemento donde mostraremos las coordenadas
+        const div = document.createElement("div");
+        div.id = "coordenadas";
+        document.body.appendChild(div);
+
+        // Escuchar el movimiento del ratón
+        document.addEventListener("mousemove", (evento) => {
+            const x = evento.clientX;
+            const y = evento.clientY;
+            
+            div.textContent = `X: ${x}px, Y: ${y}px`;
+        });
+    });
+</script>
+<body>
+</body>
+</html>

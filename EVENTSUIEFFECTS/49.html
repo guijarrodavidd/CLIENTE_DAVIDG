@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex49</title>
+</head>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // 1. Insertar h1 al cargar la página
+        const h1 = document.createElement("h1");
+        h1.textContent = "Welcome to this page!";
+        document.body.insertBefore(h1, document.body.firstChild);
+
+        // 2. Seleccionar la imagen
+        const imagen = document.getElementById("miImagen");
+
+        // 3. Guardar la imagen original
+        const imagenOriginal = imagen.src;
+        const imagenAlternativa = "../image.png";
+
+        // 4. Mouseover: cambiar a otra imagen
+        imagen.addEventListener("mouseover", () => {
+            imagen.src = imagenAlternativa;
+        });
+
+        // 5. Mouseout: volver a la imagen original
+        imagen.addEventListener("mouseout", () => {
+            imagen.src = imagenOriginal;
+        });
+
+        // 6. Click: mostrar alerta
+        imagen.addEventListener("click", () => {
+            alert("Stop clicking me!!");
+        });
+    });
+</script>
+<body>
+    <img id="miImagen" src="../Captura desde 2025-11-04 09-39-06.png" alt="Imagen" width="300px">
+</body>
+</html>

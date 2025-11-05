@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex51 - Image Carousel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        /* Contenedor de la imagen grande */
+        #imagenGrande {
+            width: 400px;
+            height: 300px;
+            margin: 0 auto 40px;
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #imagenGrande img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        /* Contenedor de miniaturas */
+        #miniaturas {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Estilo de cada miniatura */
+        .miniatura {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            border: 2px solid #999;
+            border-radius: 5px;
+            transition: transform 0.2s;
+            background-color: white;
+            overflow: hidden;
+        }
+
+        .miniatura img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Efecto hover: agrandar */
+        .miniatura:hover {
+            transform: scale(1.2);
+            border-color: #333;
+        }
+    </style>
+</head>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Array con las imágenes (ruta miniatura, ruta imagen grande)
+        const imagenes = [
+            { thumb: "../image.png", full: "../image.png" },
+            { thumb: "../image0.jpeg", full: "../image0.jpeg" },
+            { thumb: "../Captura desde 2025-11-04 09-39-06.png", full: "../Captura desde 2025-11-04 09-39-06.png" }
+        ];
+
+        // Obtener el contenedor de miniaturas
+        const contenedorMiniaturas = document.getElementById("miniaturas");
+        const imagenGrandeDiv = document.getElementById("imagenGrande");
+
+        // Crear las miniaturas dinámicamente
+        imagenes.forEach((imagen) => {
+            // Crear div con la clase "miniatura"
+            const miniatura = document.createElement("div");
+            miniatura.className = "miniatura";
+
+            // Crear la imagen dentro
+            const img = document.createElement("img");
+            img.src = imagen.thumb;
+            img.alt = "Thumbnail";
+
+            // Añadir la imagen al div
+            miniatura.appendChild(img);
+
+            // Doble clic: cargar imagen grande
+            miniatura.addEventListener("dblclick", () => {
+                imagenGrandeDiv.innerHTML = `<img src="${imagen.full}" alt="Imagen grande">`;
+            });
+
+            // Añadir la miniatura al contenedor
+            contenedorMiniaturas.appendChild(miniatura);
+        });
+
+        // Cargar la primera imagen al comenzar
+        if (imagenes.length > 0) {
+            imagenGrandeDiv.innerHTML = `<img src="${imagenes[0].full}" alt="Imagen grande">`;
+        }
+    });
+</script>
+<body>
+    <h1>Image Carousel</h1>
+    
+    <!-- Contenedor de la imagen grande -->
+    <div id="imagenGrande"></div>
+
+    <!-- Contenedor de miniaturas -->
+    <div id="miniaturas"></div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex52 - Window Control</title>
+    <style>
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<script>
+    // Variable global para guardar la referencia a la ventana
+    let ventanaAbierta = null;
+
+    // Función para abrir la ventana
+    function abrirVentana() {
+        // Parámetros: URL, nombre, especificaciones
+        ventanaAbierta = window.open(
+            "about:blank",           // URL vacía (página en blanco)
+            "ventanaRoja",           // Nombre de la ventana
+            "width=100,height=100,toolbar=no,menubar=no,location=no,scrollbars=no"
+        );
+
+        // Cambiar el fondo a rojo
+        if (ventanaAbierta) {
+            ventanaAbierta.document.body.style.backgroundColor = "red";
+            ventanaAbierta.document.body.innerHTML = "<p style='color: white; text-align: center; margin-top: 30px;'>Ventana pequeña</p>";
+        }
+    }
+
+    // Función para redimensionar y traer al frente
+    function redimensionarVentana() {
+        if (ventanaAbierta && !ventanaAbierta.closed) {
+            // Redimensionar a 250x250
+            ventanaAbierta.resizeTo(250, 250);
+            
+            // Traer al frente (focus)
+            ventanaAbierta.focus();
+        } else {
+            alert("La ventana no está abierta. Abre una primero.");
+        }
+    }
+</script>
+<body>
+    <h1>Window Control</h1>
+
+    <button onclick="abrirVentana()">Abrir ventana 100×100</button>
+    <button onclick="redimensionarVentana()">Redimensionar a 250×250 y traer al frente</button>
+</body>
+</html>
