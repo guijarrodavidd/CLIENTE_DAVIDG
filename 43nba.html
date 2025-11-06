@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball Players</title>
+</head>
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    font-family: 'Arial', sans-serif;
+    padding: 30px;
+    min-height: 100vh;
+}
+
+body > h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 36px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.name-tag {
+    border: 2px solid #ffb81c;
+    border-radius: 12px;
+    width: 300px;
+    height: 500px;
+    margin-bottom: 20px;
+    background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%);
+    font-family: 'Arial', sans-serif;
+    padding: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+}
+
+.name-tag:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(255, 184, 28, 0.4);
+}
+
+.name-tag img {
+    max-width: 200px;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    border: 3px solid #ffb81c;
+}
+
+.name-tag img:hover {
+    transform: scale(1.15);
+    filter: brightness(1.1);
+}
+
+.name-tag h1 {
+    color: #ffb81c;
+    text-align: center;
+    height: auto;
+    margin: 12px 0px 8px 0px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.name-tag h2 {
+    color: #ffffff;
+    font-size: 14px;
+    margin: 5px 0;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+.name-tag h3 {
+    color: #cccccc;
+    font-size: 13px;
+    margin: 5px 0;
+    font-weight: normal;
+}
+
+.name-tag h4 {
+    color: #ffb81c;
+    font-size: 16px;
+    margin: 10px 0 0 0;
+    font-weight: bold;
+}
+
+.name-tag p {
+    position: relative;
+    left: 0px;
+    padding: 10px;
+    width: 100%;
+    height: auto;
+    background: transparent;
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+    text-align: center;
+    color: #ffffff;
+}
+
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const jugadores = [
+            {
+                id: 1,
+                imagen: "./player1.png",
+                nombre: "LeBron James",
+                posicion: "Alero",
+                edad: 39,
+                puntosPorPartido: 23.8
+            },
+            {
+                id: 2,
+                imagen: "./player2.png",
+                nombre: "Stephen Curry",
+                posicion: "Base",
+                edad: 35,
+                puntosPorPartido: 29.4
+            },
+            {
+                id: 3,
+                imagen: "./player3.png",
+                nombre: "Giannis Antetokounmpo",
+                posicion: "Ala-Pívot",
+                edad: 29,
+                puntosPorPartido: 31.1
+            },
+            {
+                id: 4,
+                imagen: "./player4.png",
+                nombre: "Kevin Durant",
+                posicion: "Alero",
+                edad: 35,
+                puntosPorPartido: 27.1
+            },
+            {
+                id: 5,
+                imagen: "./player5.png",
+                nombre: "Luka Doncic",
+                posicion: "Base/Alero",
+                edad: 25,
+                puntosPorPartido: 33.9
+            }
+            
+        ];
+        var container = document.body;
+        jugadores.forEach(jugador => {
+            const newDiv = document.createElement("div");
+            newDiv.className = "name-tag";  // Le asignamos la clase CSS
+
+            const img = document.createElement("img");
+            img.src = (jugador.imagen);
+            newDiv.appendChild(img);
+
+            const h1 = document.createElement("h1");
+            h1.textContent = (jugador.nombre);
+            newDiv.appendChild(h1);
+
+            const h2 = document.createElement("h2");
+            h2.textContent = (`Posición: ${jugador.posicion}`);
+            newDiv.appendChild(h2);
+            
+            const h3 = document.createElement("h3");
+            h3.textContent = (`Edad: ${jugador.edad}`);
+            newDiv.appendChild(h3);
+            container.appendChild(newDiv);
+
+            const h4 = document.createElement("h4");
+            h4.textContent = (`Puntos por Partido: ${jugador.puntosPorPartido}`);
+            newDiv.appendChild(h4);
+            container.appendChild(newDiv);
+        });
+    });
+</script>
+<body>
+    <h1>Basketball Players</h1>
+</body>
+</html>
