@@ -150,8 +150,6 @@ body > h1 {
     text-align: center;
     color: #ffffff;
 }
-
-
 </style>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -196,8 +194,11 @@ body > h1 {
                 edad: 25,
                 puntosPorPartido: 33.9
             }
-            
         ];
+
+        // Array para guardar las referencias a los h1 (nombres)
+        const nombresElements = [];
+
         var container = document.body;
         jugadores.forEach(jugador => {
             const newDiv = document.createElement("div");
@@ -216,6 +217,9 @@ body > h1 {
             const h1 = document.createElement("h1");
             h1.textContent = (jugador.nombre);
             newDiv.appendChild(h1);
+
+            // Guardar referencia al h1 para poder modificarlo después
+            nombresElements.push(h1);
 
             const h2 = document.createElement("h2");
             h2.textContent = (`Posición: ${jugador.posicion}`);
@@ -241,6 +245,20 @@ body > h1 {
             container.appendChild(newDiv);
         });
 
+        // AQUÍ EMPIEZA LO NUEVO - Pedir número y nombre
+        const posicion = parseInt(prompt("¿Qué posición de tarjeta quieres cambiar? (1-5)"));
+        
+        if (posicion >= 1 && posicion <= jugadores.length) {
+            const nuevoNombre = prompt("¿Cuál es el nuevo nombre?");
+            
+            if (nuevoNombre) {
+                // posicion - 1 porque los arrays empiezan en 0
+                nombresElements[posicion - 1].textContent = nuevoNombre;
+                alert("¡Nombre cambiado exitosamente!");
+            }
+        } else {
+            alert("Posición inválida. Debes ingresar un número entre 1 y 5");
+        }
     });
 </script>
 <body>
