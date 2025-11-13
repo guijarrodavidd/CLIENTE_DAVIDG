@@ -8,7 +8,7 @@
             margin: 0 auto;
         }
         input, select, textarea, fieldset {
-            width: 250px;
+            width: 500px;
             box-sizing: border-box;
         }
         fieldset {
@@ -31,6 +31,10 @@
             border: 2px solid #333;
             background-color: #f5f5f5;
             display: none;
+        }
+        #teamsContainer {
+            display: none;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -73,6 +77,24 @@
         <div id="countryContainer"></div>
         <br><br>
 
+        <fieldset>
+            <legend>Series:</legend>
+            <input type="checkbox" id="daredevil" name="series" value="Daredevil">
+            <label for="daredevil">Daredevil</label>
+            <input type="checkbox" id="jessica" name="series" value="Jessica Jones">
+            <label for="jessica">Jessica Jones</label>
+            <input type="checkbox" id="luke" name="series" value="Luke Cage">
+            <label for="luke">Luke Cage</label>
+            <input type="checkbox" id="ironfist" name="series" value="Iron Fist">
+            <label for="ironfist">Iron Fist</label>
+        </fieldset>
+
+        <div id="teamsContainer">
+            <label for="teams">Teams:</label>
+            <div id="teamsSelect"></div>
+            <br>
+        </div>
+
         <label for="comments">Comments:</label><br>
         <textarea id="comments" name="comments" rows="4" cols="40"></textarea>
         <br><br>
@@ -100,14 +122,60 @@
 
         document.getElementById('countryContainer').appendChild(select);
 
+        // Crear el select de teams dinámicamente
+        const teams = ['Justice League', 'Avengers', 'Defenders'];
+        const teamsSelect = document.createElement('select');
+        teamsSelect.id = 'teams';
+        teamsSelect.name = 'teams';
+        teamsSelect.style.width = '250px';
+        teamsSelect.style.boxSizing = 'border-box';
+
+        teams.forEach((team, index) => {
+            const option = document.createElement('option');
+            option.value = team;
+            option.textContent = team;
+            if (index === teams.length - 1) {
+                option.selected = true;
+            }
+            teamsSelect.appendChild(option);
+        });
+
+        document.getElementById('teamsSelect').appendChild(teamsSelect);
+
+        // Verificar si todos los checkboxes de series están seleccionados
+        function checkAllSeriesSelected() {
+            const seriesCheckboxes = document.querySelectorAll('input[name="series"]');
+            const allSelected = Array.from(seriesCheckboxes).every(checkbox => checkbox.checked);
+            
+            if (allSelected) {
+                document.getElementById('teamsContainer').style.display = 'block';
+            } else {
+                document.getElementById('teamsContainer').style.display = 'none';
+            }
+        }
+
+        // Agregar event listeners a los checkboxes de series
+        document.querySelectorAll('input[name="series"]').forEach(checkbox => {
+            checkbox.addEventListener('change', checkAllSeriesSelected);
+        });
+
         // Capturar el formulario al submit
         document.getElementById('userForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
             const formData = new FormData(this);
-            let resultado = '<h2>Datos Capturados:</h2>';
+            const resultado_obj = {};
 
             for (let [key, value] of formData.entries()) {
+                if (resultado_obj[key]) {
+                    resultado_obj[key] += ', ' + value;
+                } else {
+                    resultado_obj[key] = value;
+                }
+            }
+
+            let resultado = '<h2>Datos Capturados:</h2>';
+            for (let [key, value] of Object.entries(resultado_obj)) {
                 resultado += `<p><strong>${key}:</strong> ${value}</p>`;
             }
 

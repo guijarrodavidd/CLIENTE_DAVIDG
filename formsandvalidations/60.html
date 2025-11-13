@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Input Filter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+        }
+        .warning {
+            color: red;
+            margin-top: 10px;
+            font-weight: bold;
+            display: none;
+        }
+        .warning.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="textInput" placeholder="Escribe algo...">
+    <div class="warning" id="warning"></div>
+
+    <script>
+        const forbiddenLetters = ['d', 'a', 'w'];
+        const textInput = document.getElementById('textInput');
+        const warningDiv = document.getElementById('warning');
+
+        textInput.addEventListener('input', function(e) {
+            let inputValue = textInput.value;
+            let foundForbidden = '';
+            let cleanValue = '';
+
+            // Recorrer todas las letras del input
+            for (let i = 0; i < inputValue.length; i++) {
+                const letter = inputValue[i].toLowerCase();
+
+                // Verificar si la letra está en las prohibidas
+                if (forbiddenLetters.includes(letter)) {
+                    foundForbidden = letter;
+                } else {
+                    // Si no está prohibida, guardarla en el valor limpio
+                    cleanValue += inputValue[i];
+                }
+            }
+
+            // Actualizar el input sin las letras prohibidas
+            textInput.value = cleanValue;
+
+            // Mostrar o ocultar la advertencia
+            if (foundForbidden) {
+                warningDiv.textContent = `The letter ${foundForbidden} is not allowed on this page`;
+                warningDiv.classList.add('show');
+            } else {
+                warningDiv.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
