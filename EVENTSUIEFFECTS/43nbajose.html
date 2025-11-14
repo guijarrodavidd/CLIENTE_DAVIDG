@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball Players</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Arial', sans-serif;
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+        body > h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 36px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .name-tag {
+            border: 2px solid #ffb81c;
+            border-radius: 12px;
+            width: 300px;
+            height: 500px;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%);
+            font-family: 'Arial', sans-serif;
+            padding: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+            position: relative;
+        }
+
+        .name-tag:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(255, 184, 28, 0.4);
+        }
+
+        .card-id {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #ffb81c;
+            color: #1a1a1a;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        .remove-btn, .but {
+            position: absolute;
+            bottom: 50px;
+            left: 10px;
+            right: 10px;
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .edt {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            background-color: #4444ff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .remove-btn:hover, .but:hover {
+            background-color: #dd0000;
+            transform: scale(1.05);
+        }
+
+        .edt:hover {
+            background-color: #0000dd;
+            transform: scale(1.05);
+        }
+
+        .remove-btn:active, .but:active, .edt:active {
+            transform: scale(0.95);
+        }
+
+        .name-tag img {
+            max-width: 200px;
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            border: 3px solid #ffb81c;
+        }
+
+        .name-tag img:hover {
+            transform: scale(1.15);
+            filter: brightness(1.1);
+        }
+
+        .name-tag h2 {
+            color: #ffb81c;
+            text-align: center;
+            height: auto;
+            margin: 12px 0px 8px 0px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .name-tag p {
+            position: relative;
+            left: 0px;
+            padding: 5px;
+            width: 100%;
+            height: auto;
+            background: transparent;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        #showForm {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 30px;
+            background-color: #ffb81c;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #showForm:hover {
+            background-color: #ffa500;
+        }
+
+        #newPlayerForm {
+            display: none;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        #newPlayerForm h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #newPlayerForm input, #newPlayerForm select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        #submitForm {
+            width: 100%;
+            padding: 12px;
+            background-color: #1e3c72;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        #submitForm:hover {
+            background-color: #2a5298;
+        }
+    </style>
+</head>
+<body>
+    <h1>Basketball Players</h1>
+    
+    <button id="showForm">Show Form</button>
+    
+    <div id="newPlayerForm">
+        <h2>Add New Player</h2>
+        <form>
+            <input type="number" name="pid" placeholder="Player ID" required>
+            <input type="text" name="pname" placeholder="First Name" required>
+            <input type="text" name="psurname" placeholder="Last Name" required>
+            <input type="text" name="position" placeholder="Position" required>
+            <input type="number" name="age" placeholder="Age" required>
+            <input type="number" step="0.1" name="ppg" placeholder="Points Per Game" required>
+            <button type="submit" id="submitForm">Add Player</button>
+        </form>
+    </div>
+
+    <template>
+        <div class="name-tag">
+            <img src="" alt="Player">
+            <h2></h2>
+            <p>Position: </p>
+            <p>Age: </p>
+            <p>Points: </p>
+            <button class="but">REMOVE</button>
+            <button class="edt">EDIT</button>
+        </div>
+    </template>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+  const players = [
+    {
+      id: 24,
+      image: "./player1.png",
+      name: "Matt Costello",
+      position: "Center/Forward",
+      age: 31,
+      pointsPerGame: 12.3,
+    },
+    {
+      id: 0,
+      image: "player2.png",
+      name: "Brancou Badio",
+      position: "Guard",
+      age: 25,
+      pointsPerGame: 9.1,
+    },
+    {
+      id: 5,
+      image: "player3.png",
+      name: "Sergio de Larrea",
+      position: "Guard",
+      age: 19,
+      pointsPerGame: 10.8,
+    },
+    {
+      id: 8,
+      image: "player4.png",
+      name: "Jean Montero",
+      position: "Guard",
+      age: 21,
+      pointsPerGame: 11.5,
+    },
+    {
+      id: 4,
+      image: "player5.png",
+      name: "Jaime Pradilla",
+      position: "Forward/Center",
+      age: 23,
+      pointsPerGame: 8.9,
+    },
+  ];
+
+  let body = document.querySelector("body");
+
+  let container = document.createElement("div");
+  container.className = "container";
+
+  body.appendChild(container);
+
+  function cleanContainer() {
+    container.innerHTML = "";
+  }
+
+  function deletePlayer(players, id) {
+    let playerIndex = players.findIndex((player) => player.id == id);
+    players.splice(playerIndex, 1);
+  }
+
+  function drawPlayer(player) {
+    let myCard = document.querySelector("template").content.cloneNode(true);
+    let card = myCard.querySelector("div");
+    card.id = player.id;
+    let img = myCard.querySelector("img");
+    img.src = player.image;
+    let name = myCard.querySelector("h2");
+    name.innerText = player.name;
+    let p = myCard.querySelectorAll("p");
+    let p1 = p[0];
+    let p2 = p[1];
+    let p3 = p[2];
+    p1.innerText += player.position;
+    p2.innerText += player.age + " years";
+    p3.innerText += player.pointsPerGame + " points per game";
+    let rmBtn = myCard.querySelector(".but");
+    let edBtn = myCard.querySelector(".edt");
+
+    container.appendChild(myCard);
+    rmBtn.addEventListener("click", () => {
+      let playerID = rmBtn.parentElement.id;
+      deletePlayer(players, playerID);
+      cleanContainer();
+      drawAllPlayers(players);
+    });
+
+    edBtn.addEventListener("click", () => {
+      let playerID = edBtn.parentElement.id;
+      let player = players.find((player) => player.id == playerID);
+      document.getElementsByName("pname")[0].value = player.name;
+      player.name = "Jose Socuellamos"
+
+
+      console.log(player);
+      
+      cleanContainer();
+      drawAllPlayers(players);
+    });
+  }
+
+  function drawAllPlayers(players) {
+    for (const player of players) {
+      drawPlayer(player);
+    }
+  }
+
+  drawAllPlayers(players);
+
+  // let myPlayerName = prompt(
+  //   "Enter the jersey number of the player you want to rename: "
+  // );
+  // let newName = prompt("Enter the new name of the player: ");
+  // let playerIndex = players.findIndex((player) => player.name == myPlayerName);
+  // players[playerIndex].name = newName;
+  // cleanContainer();
+  // drawAllPlayers(players);
+
+  let addPlayerBtn = document.querySelector("#showForm");
+
+  let formDiv = document.querySelector("#newPlayerForm");
+
+  addPlayerBtn.addEventListener("click", function () {
+    if (addPlayerBtn.textContent == "Show Form") {
+      formDiv.style.display = "block";
+      addPlayerBtn.textContent = "Hide Form";
+    } else {
+      formDiv.style.display = "none";
+      addPlayerBtn.textContent = "Show Form";
+    }
+
+    let submitBtn = document.querySelector("#submitForm");
+    submitBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      let idInput = document.getElementsByName("pid")[0].value;
+      let nameInput = document.getElementsByName("pname")[0].value;
+      let surnameInput = document.getElementsByName("psurname")[0].value;
+      let posInput = document.getElementsByName("position")[0].value;
+      let ageInput = document.getElementsByName("age")[0].value;
+      let ppgInput = document.getElementsByName("ppg")[0].value;
+
+      console.log(idInput);
+
+      let newPlayer = {
+        id: idInput,
+        image: "default.jpg",
+        name: nameInput + " " + surnameInput,
+        position: posInput,
+        age: ageInput,
+        pointsPerGame: ppgInput,
+      };
+
+      players.push(newPlayer);
+      document.querySelector("form").reset();
+      formDiv.style.display = "none";
+      addPlayerBtn.innerText = "Show Form";
+      cleanContainer();
+      drawAllPlayers(players);
+    });
+  });
+});
+
+    </script>
+</body>
+</html>
