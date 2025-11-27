@@ -174,17 +174,39 @@ window.onload = function () {
     drawAllPlayers(players);
 
     let orderBySurnameBtn = this.document.querySelector("#b_surname");
+    let btnState = 0;
     orderBySurnameBtn.addEventListener("click", function(e) {
         let orderedPlayers = [...players];
-        orderedPlayers.sort((a,b) => {
-            if (a.surname < b.surname) {
-                return -1;
-            } else if (a.surname > b.surname) {
-                return 1;
-            } else {
-                return 0;
-            }
-        })
+        // 0 = alphabetic order - 1 = reverse order - 2 = no order
+        if (btnState == 0) {
+            orderedPlayers.sort((a,b) => {
+                if (a.surname < b.surname) {
+                    return -1;
+                } else if (a.surname > b.surname) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            });
+            btnState++;
+            orderBySurnameBtn.innerHTML = "Surname + &#8595;"
+        } else if (btnState == 1 ) {
+            orderedPlayers.sort((a,b) => {
+                if (a.surname < b.surname) {
+                    return 1;
+                } else if (a.surname > b.surname) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            });
+            btnState++;
+            orderBySurnameBtn.innerHTML = "Surname + &#8595;";
+        } else {
+            btnState = 0;
+            orderBySurnameBtn.innerHTML = "Surname";
+
+        }
         cleanContainer();
         drawAllPlayers(orderedPlayers);
     })
