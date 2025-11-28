@@ -170,5 +170,33 @@ window.onload = function () {
             drawPlayer(players[i]);
         }
     }
+    const backButton = document.querySelector("#back");
+    const pageInfo = document.querySelector("#page-info");
+    const nextButton = document.querySelector("#next");
+    let currentPage = 1;
+    const elementsPerPage = 3;
 
-}
+    let getTotalPages = () => Math.ceil(players.length / elementsPerPage);
+    console.log(getTotalPages());
+
+    function getDataSlice(page) {
+        let startSlice = page * elementsPerPage - elementsPerPage;
+        let endSlice = page * elementsPerPage;
+        return players.slice(startSlice, endSlice);
+    }
+    
+    function nextPage() {
+        currentPage++;
+        drawPage();
+    }
+    function lastPage() {
+        currentPage--;
+        drawPage();
+    }
+    function drawPage() {
+        console.log(currentPage);
+    }
+
+    backButton.addEventListener("click", lastPage);
+    nextButton.addEventListener("click", lastPage);
+};
