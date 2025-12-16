@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagen Centrada</title>
+    <script type="text/javascript" src="jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="jq_ex22.js"></script>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .rectangulo {
+            background-color: #4CAF50;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            position: relative; /*Necesario para que funcione animate left */
+        }
+    </style>
+</head>
+<body>
+    <div class="rectangulo">
+        <img src="logo-solvam.jpg" alt="Imagen">
+    </div>
+</body>
+</html>

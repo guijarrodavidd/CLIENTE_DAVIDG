@@ -74,16 +74,4 @@ $(document).ready(function() {
         image.stop(true, true)
         .removeAttr("style");
     });
-
-    
-
-    $( ".button-group .button:eq(1)" ).on( "click", function() {
-        $(".img-box img").toggle();
-    });
-    $( ".button-group .button:eq(1)" ).on( "click", function() {
-        $(".img-box img").toggle();
-    });
-    $( ".button-group .button:eq(1)" ).on( "click", function() {
-        $(".img-box img").toggle();
-    });
 });
