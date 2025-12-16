@@ -1,0 +1,125 @@
+/* 1. Importamos una fuente moderna y tecnológica */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap');
+
+/* 2. Reseteo básico y Fondo General */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+    background-color: #0f172a; /* Azul muy oscuro */
+    /* Un degradado sutil de fondo para dar profundidad */
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(76, 29, 149, 0.4), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(14, 165, 233, 0.2), transparent 25%);
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin: 40px 0;
+    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* 3. El Grid del Contenedor (Responsivo) */
+/* Nota: Asegúrate de que tu JS tenga: container.className = "container"; */
+.container {
+    display: grid;
+    /* Esto crea columnas automáticas según el ancho de pantalla */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px 50px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* 4. La Tarjeta (Glassmorphism) */
+.card {
+    background: rgba(255, 255, 255, 0.05); /* Muy transparente */
+    backdrop-filter: blur(10px); /* El efecto borroso detrás */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 25px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Efecto Hover: La tarjeta flota y brilla */
+.card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(0, 242, 254, 0.2); /* Resplandor azul */
+    border-color: rgba(0, 242, 254, 0.5);
+}
+
+/* 5. Tipografía de la Tarjeta */
+
+/* Marca (Brand) - Pequeño y arriba */
+.card h2 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #94a3b8; /* Gris azulado */
+    margin-bottom: 5px;
+}
+
+/* Modelo (Model) - Grande y destacado */
+.card h3 {
+    font-size: 1.8rem;
+    margin: 0 0 20px 0;
+    font-weight: 700;
+    line-height: 1.1;
+    background: linear-gradient(90deg, #fff, #cbd5e1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Especificaciones (p) */
+.card p {
+    font-size: 0.95rem;
+    color: #e2e8f0;
+    margin: 8px 0;
+    padding-left: 15px;
+    border-left: 2px solid #334155; /* Línea decorativa a la izquierda */
+    transition: border-color 0.3s;
+}
+
+.card:hover p {
+    border-left-color: #0ea5e9; /* La línea se ilumina al pasar el mouse */
+}
+
+/* PRECIO (El último párrafo) - Estilo Botón */
+.card p:last-child {
+    margin-top: 25px;
+    background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.4rem;
+    border: none;
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+    cursor: pointer;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    /* Quitamos el borde izquierdo que pusimos a los otros p */
+    border-left: none; 
+    padding-left: 0;
+}
+
+.card p:last-child:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+}
