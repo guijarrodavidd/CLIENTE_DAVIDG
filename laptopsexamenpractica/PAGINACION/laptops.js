@@ -132,4 +132,69 @@ function drawAllLaptops(laptops) {
         drawLaptop(laptops[i])
     }
 }
-drawAllLaptops(laptops);
+
+// let brandArray = laptops.map((laptop) => laptop.brand)
+// var brandSet = new Set(brandArray);
+// brandArray = Array.from(brandSet).sort()
+
+
+
+
+
+
+
+//PAGINACION:
+
+const backButton = document.querySelector("#back");
+const pageInfo = document.querySelector("#page-info");
+const nextButton = document.querySelector("#next");
+
+let currentPage = 1;
+const elementPerPage = 4;
+
+pageInfo.textContent = currentPage + " / " + getTotalPages();
+
+function getDataSlice(page) {
+    let startSlice = page * elementPerPage - elementPerPage
+    let endSlice = page * elementPerPage
+    return laptops.slice(startSlice, endSlice)
+}
+
+function getTotalPages() {
+    return Math.ceil(laptops.length / elementPerPage);
+}
+
+function drawPage() {
+    cleanContainer();
+    manageButtons();
+    pageInfo.textContent = currentPage + " / " + getTotalPages();
+    let laptopSlice = getDataSlice(currentPage);
+    drawAllLaptops(laptopSlice);
+    
+}
+
+function nextPage() {
+    currentPage++;
+    drawPage();
+}
+function previousPage() {
+    currentPage--;
+    drawPage();
+}
+
+function manageButtons (){
+    if (currentPage == 1) {
+        backButton.disabled = true
+    } else {
+        backButton.disabled = false
+    }
+    if (currentPage == getTotalPages()) {
+        nextButton.disabled = true
+    } else {
+        nextButton.disabled = false
+    }
+}
+backButton.addEventListener("click", previousPage);
+nextButton.addEventListener("click", nextPage);
+
+drawPage()
