@@ -1,0 +1,177 @@
+/* Importamos fuentes: Una 'Gorda' para títulos y una 'Mono' para detalles técnicos */
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* --- RESET & FONDO --- */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Fondo gris cemento oscuro, muy urbano */
+    background-color: #1a1a1a; 
+    font-family: 'Space Mono', monospace;
+    color: #000;
+}
+
+/* --- GRID CONTENEDOR --- */
+.container {
+    display: grid;
+    /* Grid responsive automático */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* --- LA TARJETA (CARD) --- */
+.card {
+    background-color: #ffffff;
+    /* Flexbox para ordenar elementos verticalmente */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+    /* Borde afilado, nada de border-radius */
+    border: 1px solid #333;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efecto Hover: La tarjeta se levanta rígida */
+.card:hover {
+    transform: translate(-5px, -5px);
+    /* Sombra sólida, estilo cómic/pop-art */
+    box-shadow: 8px 8px 0px #ff4500; /* Naranja Seguridad */
+    border-color: #ff4500;
+}
+
+/* --- LA IMAGEN (El truco del Order) --- */
+.card img {
+    /* Manda la imagen al principio, aunque en el JS esté al final */
+    order: -1; 
+    width: 100%;
+    height: 180px;
+    object-fit: contain; /* Que se vea la zapatilla entera */
+    margin-bottom: 20px;
+    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1));
+    transition: transform 0.3s ease;
+}
+
+.card:hover img {
+    transform: scale(1.1) rotate(-5deg); /* Efecto dinámico al pasar el ratón */
+}
+
+/* --- TIPOGRAFÍA --- */
+
+/* Marca (Nike, Adidas...) */
+.card h1 {
+    font-family: 'Anton', sans-serif; /* Fuente impactante */
+    text-transform: uppercase;
+    font-size: 3rem; /* Gigante de fondo */
+    color: #f0f0f0; /* Gris muy claro */
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    margin: 0;
+    z-index: 0; /* Detrás de la zapatilla */
+    line-height: 0.8;
+    pointer-events: none; /* Que no moleste al click */
+}
+
+/* Modelo (Jordan 1, Yeezy...) */
+.card h2 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    margin: 5px 0;
+    z-index: 1;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    line-height: 1;
+}
+
+/* Edición y Talla */
+.card p {
+    margin: 5px 0;
+    font-size: 0.85rem;
+    color: #555;
+    z-index: 1;
+    border-bottom: 1px dashed #ccc; /* Línea de puntos tipo ticket */
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Estilo para simular etiquetas en el texto */
+.card p:nth-of-type(1)::before { content: "EDITION: "; font-weight: bold; color: #000;}
+.card p:nth-of-type(2)::before { content: "SIZE: "; font-weight: bold; color: #000;}
+
+/* --- EL PRECIO (Botón de compra) --- */
+.card p:last-child {
+    margin-top: 15px;
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 15px;
+    text-align: center;
+    border-bottom: none;
+    cursor: pointer;
+    display: block; /* Ocupa todo el ancho */
+    transition: background 0.2s;
+}
+
+.card p:last-child::after {
+    content: " \2192"; /* Flechita a la derecha */
+}
+
+.card p:last-child:hover {
+    background-color: #ff4500; /* Cambio a naranja al pasar el ratón */
+    color: #000;
+}
+
+/* BARRA DE FILTROS */
+.filter-bar {
+    max-width: 1400px;
+    margin: 30px auto 0 auto;
+    padding: 0 40px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-bar input, 
+.filter-bar select, 
+.filter-bar button {
+    padding: 12px 20px;
+    border: 2px solid #333;
+    background-color: #1a1a1a;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.filter-bar input::placeholder {
+    color: #666;
+}
+
+.filter-bar input:focus,
+.filter-bar select:focus {
+    border-color: #fff;
+    background-color: #000;
+}
+
+.filter-bar button {
+    background-color: #333;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.filter-bar button:hover {
+    background-color: #ff4500; /* Naranja estilo botón de compra */
+    color: #000;
+    border-color: #ff4500;
+}
